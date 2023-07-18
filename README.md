@@ -28,6 +28,7 @@ information, including links to the download page, is available at
 Here is an example of what closed-shell Hartree-Fock scripts look
 like:
 
+```
 def rhf(atoms,**opts):
     	"General wrapper for restricted closed-shell hartree fock"
     	ConvCriteria = opts.get('ConvCriteria',1e-5)
@@ -50,7 +51,7 @@ def rhf(atoms,**opts):
         	if abs(energy-eold) < ConvCriteria: break
         	eold = energy
     	return energy
-
+```
 Even without knowing any Python, it is easy to see what the various 
 steps in the program are doing.
 
