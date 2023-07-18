@@ -84,17 +84,17 @@ if enable_libint:
     libint_static = [] # Libint object files
     for part in ["libint","libderiv","libr12"]:
         libint_static += glob.glob("libint-1.1.4/src/lib/%s/tmp/%s/.libs/*.o"%(part,part))
-        
+
     # Error checking
     if libint_static == []:
         raise Exception("Object files not found, have you compiled libint with configure --enable-shared ?")
-    
+
     # Preparing the extension
     libint_includes = ["libint-1.1.4/include/libint"] # Libint include dir
-    
+
     lib_clibint =["Src/lib/clibint.c"] + lib_shell      # Thin libint wrapper (actually one function, shell_compute)
     clibint_ext_src = ["Src/PyQuante/clibint.c"] + lib_clibint # Need to add libint_static when linking
-    
+
     clibint_ext = Extension("PyQuante.clibint",
                             clibint_ext_src,
                             include_dirs = lib_includes + libint_includes ,
@@ -111,9 +111,10 @@ setup(name="PyQuante",
       author_email = "rmuller@sandia.gov",
       long_description = "\n".join(doclines[2:]),
       url = "http://pyquante.sourceforge.net",
-      licence = "BSD",
+      license = "BSD",
       platforms = ["any"],
-      classifiers = filter(None,classifiers.split("\n")),
+      #classifiers = filter(None,classifiers.split("\n")),
+      classifiers = classifiers.split("\n"),
       packages = ['PyQuante','PyQuante.Basis','PyQuante.IO','PyQuante.IO.FormatHandlers'],
       ext_modules = ext_modules
       )

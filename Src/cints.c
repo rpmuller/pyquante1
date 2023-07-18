@@ -8,11 +8,11 @@
  *
  This program is part of the PyQuante quantum chemistry program suite.
 
- Copyright (c) 2004, Richard P. Muller. All Rights Reserved. 
+ Copyright (c) 2004, Richard P. Muller. All Rights Reserved.
 
  PyQuante version 1.2 and later is covered by the modified BSD
  license. Please see the file LICENSE that is part of this
- distribution. 
+ distribution.
  **********************************************************************/
 
 
@@ -53,7 +53,7 @@ double lgamma(double z) {
     c[4]=-1.231739572450155;
     c[5]=0.1208650973866179e-2;
     c[6]=-0.5395239384953e-5;
-   
+
     x   = z;
     y   = x;
     tmp = x+5.5;
@@ -68,7 +68,7 @@ double lgamma(double z) {
     }
 #endif
 
-static double fB(int i, int l1, int l2, double px, double ax, double bx, 
+static double fB(int i, int l1, int l2, double px, double ax, double bx,
 		 int r, double g){
   return binomial_prefactor(i,l1,l2,px-ax,px-bx)*Bfunc(i,r,g);
 }
@@ -79,13 +79,13 @@ static double Bfunc(int i, int r, double g){
 
 static double contr_coulomb(int lena, double *aexps, double *acoefs,
 			    double *anorms, double xa, double ya, double za,
-			    int la, int ma, int na, 
+			    int la, int ma, int na,
 			    int lenb, double *bexps, double *bcoefs,
 			    double *bnorms, double xb, double yb, double zb,
-			    int lb, int mb, int nb, 
+			    int lb, int mb, int nb,
 			    int lenc, double *cexps, double *ccoefs,
 			    double *cnorms, double xc, double yc, double zc,
-			    int lc, int mc, int nc, 
+			    int lc, int mc, int nc,
 			    int lend, double *dexps, double *dcoefs,
 			    double *dnorms, double xd, double yd, double zd,
 			    int ld, int md, int nd){
@@ -101,7 +101,7 @@ static double contr_coulomb(int lena, double *aexps, double *acoefs,
 			      xb,yb,zb,bnorms[j],lb,mb,nb,bexps[j],
 			      xc,yc,zc,cnorms[k],lc,mc,nc,cexps[k],
 			      xd,yd,zd,dnorms[l],ld,md,nd,dexps[l]);
-	  
+
 	  Jij += acoefs[i]*bcoefs[j]*ccoefs[k]*dcoefs[l]*incr;
 	}
   return Jij;
@@ -145,10 +145,10 @@ static double coulomb_repulsion(double xa, double ya, double za, double norma,
 
   free(Bx);
   free(By);
-  free(Bz);  
-  
+  free(Bz);
+
   return 2.*pow(M_PI,2.5)/(gamma1*gamma2*sqrt(gamma1+gamma2))
-    *exp(-alphaa*alphab*rab2/gamma1) 
+    *exp(-alphaa*alphab*rab2/gamma1)
     *exp(-alphac*alphad*rcd2/gamma2)*sum*norma*normb*normc*normd;
 }
 
@@ -244,7 +244,7 @@ static double overlap_1D(int l1, int l2, double PAx,
       fact2(2*i-1)/pow(2*gamma,i);
   return sum;
 }
-    
+
 static double nuclear_attraction(double x1, double y1, double z1, double norm1,
 				 int l1, int m1, int n1, double alpha1,
 				 double x2, double y2, double z2, double norm2,
@@ -279,7 +279,7 @@ static double nuclear_attraction(double x1, double y1, double z1, double norm1,
   return -norm1*norm2*
     2*M_PI/gamma*exp(-alpha1*alpha2*rab2/gamma)*sum;
 }
-    
+
 static double A_term(int i, int r, int u, int l1, int l2,
 		     double PAx, double PBx, double CPx, double gamma){
   /* THO eq. 2.18 */
@@ -330,10 +330,10 @@ static double binomial_prefactor(int s, int ia, int ib, double xpa, double xpb){
   int t;
   double sum=0.;
   for (t=0; t<s+1; t++)
-    if ((s-ia <= t) && (t <= ib)) 
+    if ((s-ia <= t) && (t <= ib))
       sum += binomial(ia,s-t)*binomial(ib,t)*pow(xpa,ia-s+t)*pow(xpb,ib-t);
   return sum;
-} 
+}
 
 static int binomial(int a, int b){return fact(a)/(fact(b)*fact(a-b));}
 
@@ -347,7 +347,7 @@ static double Fgamma(double m, double x){
 
 static double gamm_inc(double a, double x){ /* Taken from NR routine gammap */
   double gamser,gammcf,gln;
-  
+
   assert (x >= 0.);
   assert (a > 0.);
   if (x < (a+1.0)) {
@@ -358,7 +358,7 @@ static double gamm_inc(double a, double x){ /* Taken from NR routine gammap */
     return exp(gln)*(1.0-gammcf);
   }
 }
- 
+
 static void gser(double *gamser, double a, double x, double *gln){
   int n;
   double sum,del,ap;
@@ -384,11 +384,11 @@ static void gser(double *gamser, double a, double x, double *gln){
     return;
   }
 }
- 
+
 static void gcf(double *gammcf, double a, double x, double *gln){
   int i;
   double an,b,c,d,del,h;
-  
+
   *gln=lgamma(a);
   b=x+1.0-a;
   c=1.0/FPMIN;
@@ -459,13 +459,13 @@ static double three_center_1D(double xi, int ai, double alphai,
 
   double gamma, dx, px, xpi,xpj,xpk,intgl;
   int q,r,s,n;
-  
+
   gamma = alphai+alphaj+alphak;
   dx = exp(-alphai*alphaj*pow(xi-xj,2)/gamma) *
     exp(-alphai*alphak*pow(xi-xk,2)/gamma) *
     exp(-alphaj*alphak*pow(xj-xk,2)/gamma);
   px = (alphai*xi+alphaj*xj+alphak*xk)/gamma;
-    
+
   xpi = px-xi;
   xpj = px-xj;
   xpk = px-xk;
@@ -691,7 +691,7 @@ static PyObject *contr_coulomb_wrap(PyObject *self,PyObject *args){
 
 static PyObject *contr_nuke_vec_wrap(PyObject *self,PyObject *args){
 
-  /* This turned out to be slower than multiple calls to 
+  /* This turned out to be slower than multiple calls to
      nuclear_attraction_vec. I'm leaving the code in place
      for reference.
   */
@@ -705,7 +705,7 @@ static PyObject *contr_nuke_vec_wrap(PyObject *self,PyObject *args){
   int i,j,k;
   double anormi,aexpi,acoefi, bnormj,bexpj,bcoefj,xck,yck,zck,wck,qck;
   double incr=0, Vnij=0;
-    
+
 
   ok = PyArg_ParseTuple(args,"OOOOOOOOOOOOOOO",
 			&aexps,&acoefs,&anorms,&aorigin,&apowers,
@@ -727,7 +727,7 @@ static PyObject *contr_nuke_vec_wrap(PyObject *self,PyObject *args){
   if (nprima<0) return NULL;
   if (nprima != PySequence_Size(acoefs)) return NULL;
   if (nprima != PySequence_Size(anorms)) return NULL;
-  
+
   nprimb = PySequence_Size(bexps);
   if (nprimb<0) return NULL;
   if (nprimb != PySequence_Size(bcoefs)) return NULL;
@@ -739,7 +739,7 @@ static PyObject *contr_nuke_vec_wrap(PyObject *self,PyObject *args){
   if (ncenters != PySequence_Size(zc)) return NULL;
   if (ncenters != PySequence_Size(wc)) return NULL;
   if (ncenters != PySequence_Size(qc)) return NULL;
-  
+
   for (k=0; k<ncenters; k++){
     xck = PyFloat_AS_DOUBLE(PySequence_GetItem(xc,k));
     yck = PyFloat_AS_DOUBLE(PySequence_GetItem(yc,k));
@@ -762,7 +762,7 @@ static PyObject *contr_nuke_vec_wrap(PyObject *self,PyObject *args){
     }
   }
   return Py_BuildValue("d",Vnij);
-  
+
 }
 
 static PyObject *coulomb_repulsion_wrap(PyObject *self,PyObject *args){
@@ -794,8 +794,8 @@ static PyObject *coulomb_repulsion_wrap(PyObject *self,PyObject *args){
   if (!ok) return NULL;
   ok=PyArg_ParseTuple(powd,"iii",&ld,&md,&nd);
   if (!ok) return NULL;
-  
-  return Py_BuildValue("d", 
+
+  return Py_BuildValue("d",
     coulomb_repulsion(xa,ya,za,norma,la,ma,na,alphaa,
 		      xb,yb,zb,normb,lb,mb,nb,alphab,
 		      xc,yc,zc,normc,lc,mc,nc,alphac,
@@ -918,7 +918,7 @@ static PyObject *nuclear_attraction_vec_wrap(PyObject *self,PyObject *args){
   if (!PySequence_Check(zc_obj)) return NULL;
   if (!PySequence_Check(wc_obj)) return NULL;
   if (!PySequence_Check(qc_obj)) return NULL;
-  
+
 
   veclength = PySequence_Size(xc_obj);
   if (veclength<0) return NULL;
@@ -943,8 +943,6 @@ static PyObject *nuclear_attraction_vec_wrap(PyObject *self,PyObject *args){
   return Py_BuildValue("d",retval);
 }
 
-
-
 /* Python interface */
 static PyMethodDef cints_methods[] = {
   {"fact",fact_wrap,METH_VARARGS},
@@ -959,8 +957,8 @@ static PyMethodDef cints_methods[] = {
   {"fact_ratio2",fact_ratio2_wrap,METH_VARARGS},
   {"contr_coulomb",contr_coulomb_wrap,METH_VARARGS},
   {"coulomb_repulsion",coulomb_repulsion_wrap,METH_VARARGS},
-  {"kinetic",kinetic_wrap,METH_VARARGS}, 
-  {"overlap",overlap_wrap,METH_VARARGS}, 
+  {"kinetic",kinetic_wrap,METH_VARARGS},
+  {"overlap",overlap_wrap,METH_VARARGS},
   {"nuclear_attraction",nuclear_attraction_wrap,METH_VARARGS},
   {"nuclear_attraction_vec",nuclear_attraction_vec_wrap,METH_VARARGS},
   {"contr_nuke_vec",contr_nuke_vec_wrap,METH_VARARGS},
