@@ -8,10 +8,6 @@
  license. Please see the file LICENSE that is part of this
  distribution. 
  **************************************************************************/
-/* My routines */
-#ifdef _MSC_VER
-double lgamma(double);
-#endif
 
 static double fB(int i, int l1, int l2, double px, double ax, double bx, 
 	  int r, double g);
@@ -88,23 +84,4 @@ static double three_center_1D(double xi, int ai, double alphai,
 /* Routines from Numerical Recipes */
 static void gser(double *gamser, double a, double x, double *gln);
 static void gcf(double *gammcf, double a, double x, double *gln);
-
-/* Wrappers */
-static PyObject *fact_wrap(PyObject *self,PyObject *args);
-static PyObject *fact2_wrap(PyObject *self,PyObject *args);
-static PyObject *dist2_wrap(PyObject *self,PyObject *args);
-static PyObject *dist_wrap(PyObject *self,PyObject *args);
-static PyObject *dist_wrap(PyObject *self,PyObject *args);
-static PyObject *binomial_prefactor_wrap(PyObject *self,PyObject *args);
-static PyObject *Fgamma_wrap(PyObject *self,PyObject *args);
-static PyObject *ijkl2intindex_wrap(PyObject *self,PyObject *args);
-static PyObject *fB_wrap(PyObject *self,PyObject *args);
-static PyObject *fact_ratio2_wrap(PyObject *self,PyObject *args);
-static PyObject *contr_coulomb_wrap(PyObject *self,PyObject *args);
-static PyObject *coulomb_repulsion_wrap(PyObject *self,PyObject *args);
-static PyObject *kinetic_wrap(PyObject *self,PyObject *args);
-static PyObject *overlap_wrap(PyObject *self,PyObject *args);
-static PyObject *nuclear_attraction_wrap(PyObject *self,PyObject *args);
-static PyObject *nuclear_attraction_vec_wrap(PyObject *self,PyObject *args);
-static PyObject *three_center_1D_wrap(PyObject *self,PyObject *args);
 
